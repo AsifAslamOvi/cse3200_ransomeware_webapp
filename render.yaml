@@ -5,7 +5,5 @@ services:
     plan: free
     buildCommand: pip install -r requirements.txt
     startCommand: gunicorn -b 0.0.0.0:$PORT app:app
-    disk:
-      name: quarantine
-      mountPath: /opt/render/project/src/quarantine
-      sizeGB: 1
+    # Free tier does not support persistent disks. Quarantine uploads will be ephemeral
+    # (lost on redeploy/restart). Upgrade plan and re-add a disk if persistence is required.

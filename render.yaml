@@ -4,6 +4,7 @@ services:
     env: python
     plan: free
     buildCommand: pip install -r requirements.txt
-    startCommand: gunicorn -b 0.0.0.0:$PORT app:app
-    # Free tier does not support persistent disks. Quarantine uploads will be ephemeral
+    startCommand: gunicorn -b 0.0.0.0:$PORT app:app    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.0    # Free tier does not support persistent disks. Quarantine uploads will be ephemeral
     # (lost on redeploy/restart). Upgrade plan and re-add a disk if persistence is required.

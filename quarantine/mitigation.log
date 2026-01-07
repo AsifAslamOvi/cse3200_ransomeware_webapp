@@ -1,0 +1,7 @@
+20251231T152930Z mitigated: quarantine_20251231T152930Z.json
+20260101T102944Z mitigated: quarantine_20260101T102944Z.json
+20260101T120304Z mitigated: quarantine_20260101T120304Z.json
+20260101T122328Z mitigated: quarantine_20260101T122328Z.json
+20260101T122328Z notifications: {"note": "no notification settings configured"}
+20260101T122806Z mitigated: quarantine_20260101T122806Z.json
+20260101T122806Z notifications: {"webhook": {"status": "error", "code": 405, "text": "<!doctype html><html lang=\"en\"><head><title>Example Domain</title><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"><style>body{background:#eee;width:60vw;margin:15vh auto;font-family:system-ui,sans-serif}h1{font-size:1.5em}div{opacity:0.8}a:link,a:visited{color:#348}</style><body><div><h1>Example Domain</h1><p>This domain is for use in documentation examples without needing permission. Avoid use in operations.<p><a href=\"https://iana.org/domains/example\">Learn more</a></div></body></html>"}, "email": {"asifaslamovi@gmail.com": {"status": "error", "error": "(535, b'5.7.8 Username and Password not accepted. For more information, go to\\n5.7.8  https://support.google.com/mail/?p=BadCredentials d2e1a72fcca58-7ff7a843ee4sm38440907b3a.10 - gsmtp')"}}}

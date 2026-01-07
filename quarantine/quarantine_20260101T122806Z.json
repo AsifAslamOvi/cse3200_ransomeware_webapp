@@ -1,0 +1,31 @@
+{
+    "row": {
+        "BitcoinAddresses": 0,
+        "DebugRVA": -1729036,
+        "DebugSize": -493971,
+        "DllCharacteristics": 27863,
+        "ExportRVA": -14032508,
+        "ExportSize": -19360769,
+        "IatVRA": -1035811,
+        "MajorImageVersion": 1243,
+        "MajorLinkerVersion": 10,
+        "MajorOSVersion": 8,
+        "MinorLinkerVersion": -34,
+        "NumberOfSections": 4,
+        "ResourceSize": 4900992,
+        "SizeOfStackReserve": 1132836
+    },
+    "result": {
+        "confidence": "62%",
+        "description": "The system detected suspicious behavior consistent with ransomware activity.",
+        "prediction_code": 0,
+        "prediction_label": "Ransomware",
+        "probabilities": {
+            "benign": 0.38,
+            "ransomware": 0.62
+        },
+        "risk_level": "High"
+    },
+    "timestamp": "20260101T122806Z",
+    "file": "quarantine_20260101T122806Z.json"
+}

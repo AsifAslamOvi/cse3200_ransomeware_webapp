@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: ransomware-webapp
+    env: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn -b 0.0.0.0:$PORT app:app
+    disk:
+      name: quarantine
+      mountPath: /opt/render/project/src/quarantine
+      sizeGB: 1

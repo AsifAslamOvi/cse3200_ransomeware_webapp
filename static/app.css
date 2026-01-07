@@ -1,0 +1,4 @@
+body { background: #f5f7fb; }
+.card { box-shadow: 0 4px 14px rgba(20,30,50,0.06); }
+.mono { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, 'Roboto Mono', 'Courier New', monospace; }
+.small-muted { font-size:0.9rem; color:#6c757d }

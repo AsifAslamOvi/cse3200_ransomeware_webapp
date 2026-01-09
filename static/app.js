@@ -342,8 +342,12 @@ async function handleFileUpload(event) {
 
 async function refreshDashboard() {
   try {
+    console.log('🔄 Refreshing dashboard...');
+    
     // Fetch stats
     const stats = await fetchStats();
+    console.log('📊 Stats received:', stats);
+    
     if (stats) {
       // Update class chart
       const chartCanvas = document.getElementById('classChart');
@@ -353,16 +357,22 @@ async function refreshDashboard() {
 
       // Update stats display
       const statsPre = document.getElementById('statsPre');
-      if (statsPre && stats.head) {
-        statsPre.textContent = JSON.stringify(stats.head, null, 2);
+      if (statsPre) {
+        if (stats.head && stats.head.length > 0) {
+          statsPre.textContent = JSON.stringify(stats.head, null, 2);
+        } else {
+          statsPre.textContent = 'No data available';
+        }
       }
     }
 
     // Fetch metrics
     const metrics = await fetchMetrics();
+    console.log('📈 Metrics received:', metrics);
+    
     if (metrics) {
       const metricsPre = document.getElementById('metricsPre');
-      if (metricsPre) {
+      if (metricsPre && metrics.report && metrics.report['0']) {
         const display = {
           accuracy: formatPercent(metrics.accuracy),
           precision_ransomware: formatPercent(metrics.report['0']?.precision),
@@ -379,8 +389,10 @@ async function refreshDashboard() {
         accBadge.textContent = formatPercent(metrics.accuracy);
       }
     }
+    
+    console.log('✅ Dashboard refresh complete');
   } catch (e) {
-    console.error('Error refreshing dashboard:', e);
+    console.error('❌ Error refreshing dashboard:', e);
   }
 }
 

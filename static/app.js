@@ -340,6 +340,8 @@ async function handleFileUpload(event) {
 
 // ============ REFRESH DASHBOARD ============
 
+// ============ REFRESH DASHBOARD ============
+
 async function refreshDashboard() {
   try {
     console.log('🔄 Refreshing dashboard...');
@@ -348,21 +350,30 @@ async function refreshDashboard() {
     const stats = await fetchStats();
     console.log('📊 Stats received:', stats);
     
-    if (stats) {
+    if (stats && stats.head) {
       // Update class chart
       const chartCanvas = document.getElementById('classChart');
       if (chartCanvas && stats.class_counts) {
+        console.log('📊 Updating class chart with counts:', stats.class_counts);
         drawClassChart(chartCanvas, stats.class_counts);
       }
 
       // Update stats display
       const statsPre = document.getElementById('statsPre');
+      console.log('statsPre element:', statsPre);
       if (statsPre) {
-        if (stats.head && stats.head.length > 0) {
-          statsPre.textContent = JSON.stringify(stats.head, null, 2);
-        } else {
-          statsPre.textContent = 'No data available';
-        }
+        const statsData = JSON.stringify(stats.head, null, 2);
+        console.log('Setting stats data:', statsData);
+        statsPre.textContent = statsData;
+        statsPre.style.minHeight = '100px';
+        statsPre.style.whiteSpace = 'pre-wrap';
+        statsPre.style.wordWrap = 'break-word';
+      }
+    } else {
+      console.warn('⚠️ No stats.head data received');
+      const statsPre = document.getElementById('statsPre');
+      if (statsPre) {
+        statsPre.textContent = 'Waiting for data...';
       }
     }
 
@@ -370,23 +381,39 @@ async function refreshDashboard() {
     const metrics = await fetchMetrics();
     console.log('📈 Metrics received:', metrics);
     
-    if (metrics) {
+    if (metrics && metrics.accuracy !== undefined) {
+      // Update accuracy badge
+      const accBadge = document.getElementById('accBadge');
+      const accuracyPercentage = formatPercent(metrics.accuracy);
+      console.log('Setting accuracy:', accuracyPercentage);
+      if (accBadge) {
+        accBadge.textContent = accuracyPercentage;
+        accBadge.style.fontSize = '1.75rem';
+        accBadge.style.fontWeight = '700';
+        accBadge.style.color = '#16a34a';
+      }
+
+      // Update metrics display
       const metricsPre = document.getElementById('metricsPre');
       if (metricsPre && metrics.report && metrics.report['0']) {
         const display = {
-          accuracy: formatPercent(metrics.accuracy),
-          precision_ransomware: formatPercent(metrics.report['0']?.precision),
-          recall_ransomware: formatPercent(metrics.report['0']?.recall),
-          f1_ransomware: formatPercent(metrics.report['0']?.['f1-score']),
-          support_ransomware: metrics.report['0']?.support
+          accuracy: accuracyPercentage,
+          precision: formatPercent(metrics.report['0']?.precision),
+          recall: formatPercent(metrics.report['0']?.recall),
+          f1_score: formatPercent(metrics.report['0']?.['f1-score'])
         };
-        metricsPre.textContent = JSON.stringify(display, null, 2);
+        const metricsData = JSON.stringify(display, null, 2);
+        console.log('Setting metrics data:', metricsData);
+        metricsPre.textContent = metricsData;
+        metricsPre.style.minHeight = '100px';
+        metricsPre.style.whiteSpace = 'pre-wrap';
+        metricsPre.style.wordWrap = 'break-word';
       }
-
-      // Update accuracy badge
-      const accBadge = document.getElementById('accBadge');
-      if (accBadge && metrics.accuracy) {
-        accBadge.textContent = formatPercent(metrics.accuracy);
+    } else {
+      console.warn('⚠️ No metrics.accuracy data received');
+      const metricsPre = document.getElementById('metricsPre');
+      if (metricsPre) {
+        metricsPre.textContent = 'Waiting for metrics...';
       }
     }
     
@@ -407,9 +434,12 @@ document.addEventListener('DOMContentLoaded', async () => {
   document.getElementById('uploadForm')?.addEventListener('submit', handleFileUpload);
   document.getElementById('randomBtn')?.addEventListener('click', generateRandomRow);
 
-  // Initial load
-  await refreshDashboard();
-  showToast('✓ Dashboard ready', 'success');
+  // Small delay to ensure DOM is fully rendered
+  setTimeout(async () => {
+    console.log('⏱️ Initial dashboard load starting...');
+    await refreshDashboard();
+    showToast('✓ Dashboard ready', 'success');
+  }, 500);
 });
 
 // Auto-refresh every 30 seconds

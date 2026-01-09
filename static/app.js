@@ -354,7 +354,7 @@ async function refreshDashboard() {
       // Update stats display
       const statsPre = document.getElementById('statsPre');
       if (statsPre && stats.head) {
-        statsPre.innerHTML = `<pre>${JSON.stringify(stats.head, null, 2)}</pre>`;
+        statsPre.textContent = JSON.stringify(stats.head, null, 2);
       }
     }
 
@@ -370,13 +370,13 @@ async function refreshDashboard() {
           f1_ransomware: formatPercent(metrics.report['0']?.['f1-score']),
           support_ransomware: metrics.report['0']?.support
         };
-        metricsPre.innerHTML = `<pre>${JSON.stringify(display, null, 2)}</pre>`;
+        metricsPre.textContent = JSON.stringify(display, null, 2);
       }
 
       // Update accuracy badge
       const accBadge = document.getElementById('accBadge');
-      if (accBadge) {
-        accBadge.innerHTML = formatPercent(metrics.accuracy);
+      if (accBadge && metrics.accuracy) {
+        accBadge.textContent = formatPercent(metrics.accuracy);
       }
     }
   } catch (e) {

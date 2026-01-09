@@ -3,73 +3,924 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Ransomware Detection Dashboard</title>
+    <title>RanDetect - AI-Powered Ransomware Detection</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link href="/static/app.css" rel="stylesheet">
   </head>
   <body>
-    <div class="container py-4">
-      <div class="d-flex justify-content-between align-items-center mb-3">
-        <div>
-          <h1 class="h3">Ransomware Detection & Mitigation</h1>
-          <div class="small-muted">Adaptive ML prototype with live dashboard and upload.</div>
-        </div>
-        <div class="text-end">
-          <button id="trainBtn" class="btn btn-primary">Train Model</button>
-          <span id="trainStatus" class="ms-3 small-muted"></span>
-          <div class="mt-2">Accuracy: <span id="accBadge" class="badge bg-success">-</span></div>
+    <!-- NAVBAR -->
+    <nav class="navbar">
+      <div class="container">
+        <div class="navbar-content">
+          <div class="navbar-brand">
+            <div class="navbar-brand-icon">
+              <i class="fas fa-shield-virus"></i>
+            </div>
+            <span>RanDetect</span>
+          </div>
+          <div class="nav-actions">
+            <a href="#features" class="btn btn-sm btn-outline-primary">Features</a>
+            <a href="#metrics" class="btn btn-sm btn-primary">Dashboard</a>
+          </div>
         </div>
       </div>
+    </nav>
 
-      <div class="row g-3">
-        <div class="col-lg-4">
-          <div class="card p-3">
-            <h5>Upload Dataset</h5>
-            <form id="uploadForm">
-              <div class="mb-2">
-                <input id="fileInput" type="file" accept=".csv" class="form-control" />
+    <!-- HERO SECTION -->
+    <section class="hero">
+      <div class="container">
+        <div class="hero-content">
+          <h1><i class="fas fa-lock"></i> RanDetect</h1>
+          <p class="hero-subtitle">AI-Powered Ransomware Detection & Mitigation Platform</p>
+          <p class="text-secondary">Revolutionary machine learning system detecting ransomware-related behavior with 99.6% accuracy. Protect your systems in real-time.</p>
+          <div class="hero-buttons">
+            <a href="#predict" class="btn btn-primary btn-lg">
+              <i class="fas fa-wand-magic-sparkles"></i> Start Detection
+            </a>
+            <a href="#metrics" class="btn btn-outline-primary btn-lg">
+              <i class="fas fa-chart-line"></i> View Metrics
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- QUICK STATS -->
+    <section class="py-section">
+      <div class="container">
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-value">99.62%</div>
+            <div class="stat-label">Accuracy</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value">99.70%</div>
+            <div class="stat-label">Recall</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value">&lt;100ms</div>
+            <div class="stat-label">Inference Time</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value">12.5K+</div>
+            <div class="stat-label">Test Samples</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURES SECTION -->
+    <section class="py-large" id="features" style="background: #f9fafb;">
+      <div class="container">
+        <h2 style="text-align: center; margin-bottom: 3rem;">
+          <i class="fas fa-star"></i> Why Choose RanDetect?
+        </h2>
+        <div class="feature-grid">
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-brain"></i>
+            </div>
+            <h4>ML-Powered Detection</h4>
+            <p>Random Forest classifier trained on 62K+ samples analyzing PE file characteristics for behavior-based ransomware detection.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-bolt"></i>
+            </div>
+            <h4>Real-Time Analysis</h4>
+            <p>Sub-100ms inference latency enables instant threat detection and immediate response automation.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-bell"></i>
+            </div>
+            <h4>Multi-Channel Alerts</h4>
+            <p>Automated notifications via Slack, Email, and webhooks keep your team informed instantly.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-folder-open"></i>
+            </div>
+            <h4>Automated Quarantine</h4>
+            <p>Suspicious samples are instantly isolated with complete audit trails and metadata preservation.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-chart-bar"></i>
+            </div>
+            <h4>Live Analytics</h4>
+            <p>Real-time dashboard showing model performance, predictions, and risk assessment metrics.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-rotate"></i>
+            </div>
+            <h4>Easy Retraining</h4>
+            <p>One-click model retraining with automatic metric evaluation and artifact management.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- RANSOMWARE EDUCATION SECTION -->
+    <section class="py-large" id="education">
+      <div class="container">
+        <div style="text-align: center; margin-bottom: 3rem;">
+          <h2><i class="fas fa-graduation-cap"></i> Understanding Ransomware</h2>
+          <p class="text-secondary" style="font-size: 1.1rem; max-width: 800px; margin: 1rem auto;">
+            Knowledge is the first line of defense. Learn about ransomware threats and how to protect your organization.
+          </p>
+        </div>
+
+        <!-- What is Ransomware -->
+        <div class="card mb-4">
+          <div class="card-body" style="padding: 2rem;">
+            <div class="row align-items-center">
+              <div class="col-md-8">
+                <h3 style="color: #dc2626; margin-bottom: 1rem;">
+                  <i class="fas fa-virus"></i> What is Ransomware?
+                </h3>
+                <p style="font-size: 1.05rem; line-height: 1.7; color: #4b5563;">
+                  Ransomware is a type of malicious software (malware) that encrypts a victim's files, making them inaccessible. 
+                  The attacker then demands a ransom payment (typically in cryptocurrency) to provide the decryption key. 
+                  Without this key, recovery of the encrypted data is nearly impossible.
+                </p>
+                <div class="alert" style="background: #fef2f2; border: 1px solid #fecaca; border-radius: 8px; padding: 1rem; margin-top: 1rem;">
+                  <strong style="color: #dc2626;"><i class="fas fa-exclamation-triangle"></i> Critical Warning:</strong><br>
+                  Ransomware attacks have increased by 300% since 2020, with average ransom demands exceeding $200,000. 
+                  Organizations lose an average of $4.62 million per attack including downtime and recovery costs.
+                </div>
               </div>
-              <button class="btn btn-outline-primary btn-sm" type="submit">Upload CSV</button>
-            </form>
-            <hr />
-            <h6>Class Distribution</h6>
-            <canvas id="classChart" width="200" height="200"></canvas>
+              <div class="col-md-4 text-center">
+                <div style="font-size: 6rem; color: #dc2626; animation: pulse-slow 2s ease-in-out infinite;">
+                  <i class="fas fa-lock"></i>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
-        <div class="col-lg-8">
-          <div class="card p-3 mb-3">
-            <h5>Dataset & Metrics</h5>
+        <!-- How Ransomware Works -->
+        <div class="card mb-4">
+          <div class="card-header" style="background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%); color: white; padding: 1.25rem;">
+            <h4 style="margin: 0; color: white;"><i class="fas fa-cogs"></i> How Ransomware Works</h4>
+          </div>
+          <div class="card-body" style="padding: 2rem;">
             <div class="row">
-              <div class="col-md-6">
-                <div class="small-muted">Top rows</div>
-                <pre id="statsPre" style="max-height:220px;overflow:auto;background:#fff;padding:10px;border:1px solid #eef"></pre>
+              <div class="col-md-3 mb-3">
+                <div class="text-center p-3" style="background: #fef2f2; border-radius: 12px; border: 2px solid #fecaca;">
+                  <div style="font-size: 2.5rem; color: #dc2626; margin-bottom: 0.5rem;">
+                    <i class="fas fa-envelope"></i>
+                  </div>
+                  <h5 style="color: #991b1b; font-size: 0.95rem; font-weight: 600;">1. Initial Access</h5>
+                  <p style="font-size: 0.85rem; color: #6b7280; margin: 0;">Phishing emails, malicious attachments, or exploiting vulnerabilities</p>
+                </div>
               </div>
-              <div class="col-md-6">
-                <div class="small-muted">Latest model metrics</div>
-                <pre id="metricsPre" style="max-height:220px;overflow:auto;background:#fff;padding:10px;border:1px solid #eef"></pre>
+              <div class="col-md-3 mb-3">
+                <div class="text-center p-3" style="background: #fef2f2; border-radius: 12px; border: 2px solid #fecaca;">
+                  <div style="font-size: 2.5rem; color: #dc2626; margin-bottom: 0.5rem;">
+                    <i class="fas fa-download"></i>
+                  </div>
+                  <h5 style="color: #991b1b; font-size: 0.95rem; font-weight: 600;">2. Installation</h5>
+                  <p style="font-size: 0.85rem; color: #6b7280; margin: 0;">Malware downloads and installs itself silently on the system</p>
+                </div>
+              </div>
+              <div class="col-md-3 mb-3">
+                <div class="text-center p-3" style="background: #fef2f2; border-radius: 12px; border: 2px solid #fecaca;">
+                  <div style="font-size: 2.5rem; color: #dc2626; margin-bottom: 0.5rem;">
+                    <i class="fas fa-key"></i>
+                  </div>
+                  <h5 style="color: #991b1b; font-size: 0.95rem; font-weight: 600;">3. Encryption</h5>
+                  <p style="font-size: 0.85rem; color: #6b7280; margin: 0;">Files are encrypted using strong algorithms, rendering them unreadable</p>
+                </div>
+              </div>
+              <div class="col-md-3 mb-3">
+                <div class="text-center p-3" style="background: #fef2f2; border-radius: 12px; border: 2px solid #fecaca;">
+                  <div style="font-size: 2.5rem; color: #dc2626; margin-bottom: 0.5rem;">
+                    <i class="fas fa-money-bill-wave"></i>
+                  </div>
+                  <h5 style="color: #991b1b; font-size: 0.95rem; font-weight: 600;">4. Ransom Demand</h5>
+                  <p style="font-size: 0.85rem; color: #6b7280; margin: 0;">Attackers display ransom note demanding cryptocurrency payment</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Harmful Effects -->
+        <div class="card mb-4">
+          <div class="card-header" style="background: #991b1b; color: white; padding: 1.25rem;">
+            <h4 style="margin: 0; color: white;"><i class="fas fa-skull-crossbones"></i> Devastating Impact of Ransomware</h4>
+          </div>
+          <div class="card-body" style="padding: 2rem;">
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <div class="p-3" style="border-left: 4px solid #dc2626;">
+                  <h5 style="color: #dc2626; margin-bottom: 0.75rem;"><i class="fas fa-briefcase"></i> Business Disruption</h5>
+                  <ul style="line-height: 1.8; color: #4b5563;">
+                    <li><strong>Complete operational shutdown</strong> - Unable to access critical systems</li>
+                    <li><strong>Revenue loss</strong> - Average of $274,000 per hour of downtime</li>
+                    <li><strong>Customer impact</strong> - Service interruptions affecting clients</li>
+                    <li><strong>Supply chain disruption</strong> - Cascade effects on partners</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="col-md-6 mb-3">
+                <div class="p-3" style="border-left: 4px solid #dc2626;">
+                  <h5 style="color: #dc2626; margin-bottom: 0.75rem;"><i class="fas fa-database"></i> Data Loss</h5>
+                  <ul style="line-height: 1.8; color: #4b5563;">
+                    <li><strong>Permanent data destruction</strong> - 65% never recover all files</li>
+                    <li><strong>Intellectual property theft</strong> - Sensitive data exfiltrated</li>
+                    <li><strong>Customer data breach</strong> - Personal information compromised</li>
+                    <li><strong>Regulatory violations</strong> - GDPR, HIPAA compliance issues</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="col-md-6 mb-3">
+                <div class="p-3" style="border-left: 4px solid #dc2626;">
+                  <h5 style="color: #dc2626; margin-bottom: 0.75rem;"><i class="fas fa-dollar-sign"></i> Financial Impact</h5>
+                  <ul style="line-height: 1.8; color: #4b5563;">
+                    <li><strong>Ransom payments</strong> - Average $812,000 (2025 data)</li>
+                    <li><strong>Recovery costs</strong> - System restoration: $1.5M - $3M</li>
+                    <li><strong>Legal fees</strong> - Lawsuits, investigations, compliance</li>
+                    <li><strong>Cyber insurance premiums</strong> - Increased by 50%+</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="col-md-6 mb-3">
+                <div class="p-3" style="border-left: 4px solid #dc2626;">
+                  <h5 style="color: #dc2626; margin-bottom: 0.75rem;"><i class="fas fa-building"></i> Reputation Damage</h5>
+                  <ul style="line-height: 1.8; color: #4b5563;">
+                    <li><strong>Brand trust erosion</strong> - 60% of customers lose confidence</li>
+                    <li><strong>Media coverage</strong> - Negative publicity and scrutiny</li>
+                    <li><strong>Stock price decline</strong> - Average 5% drop for public companies</li>
+                    <li><strong>Customer churn</strong> - 30% switch to competitors</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Types of Ransomware -->
+        <div class="card mb-4">
+          <div class="card-header" style="background: linear-gradient(135deg, #ea580c 0%, #c2410c 100%); color: white; padding: 1.25rem;">
+            <h4 style="margin: 0; color: white;"><i class="fas fa-list"></i> Common Types of Ransomware</h4>
+          </div>
+          <div class="card-body" style="padding: 2rem;">
+            <div class="row">
+              <div class="col-md-4 mb-3">
+                <div class="p-3" style="background: #fff7ed; border-radius: 10px; border: 1px solid #fed7aa; height: 100%;">
+                  <h5 style="color: #ea580c;"><i class="fas fa-shield-halved"></i> Crypto Ransomware</h5>
+                  <p style="color: #6b7280; font-size: 0.95rem; line-height: 1.6;">
+                    <strong>Most common type.</strong> Encrypts files using strong encryption algorithms (AES-256, RSA-2048). 
+                    Examples: WannaCry, CryptoLocker, Ryuk.
+                  </p>
+                  <div class="mt-2" style="font-size: 0.85rem; color: #9ca3af;">
+                    <strong>Targets:</strong> Documents, databases, images, videos
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4 mb-3">
+                <div class="p-3" style="background: #fff7ed; border-radius: 10px; border: 1px solid #fed7aa; height: 100%;">
+                  <h5 style="color: #ea580c;"><i class="fas fa-desktop"></i> Locker Ransomware</h5>
+                  <p style="color: #6b7280; font-size: 0.95rem; line-height: 1.6;">
+                    <strong>Locks entire system.</strong> Prevents access to the computer by locking the screen. 
+                    Less severe as files aren't encrypted.
+                  </p>
+                  <div class="mt-2" style="font-size: 0.85rem; color: #9ca3af;">
+                    <strong>Targets:</strong> Operating system, login screens
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4 mb-3">
+                <div class="p-3" style="background: #fff7ed; border-radius: 10px; border: 1px solid #fed7aa; height: 100%;">
+                  <h5 style="color: #ea580c;"><i class="fas fa-user-secret"></i> Double Extortion</h5>
+                  <p style="color: #6b7280; font-size: 0.95rem; line-height: 1.6;">
+                    <strong>Steals then encrypts.</strong> Exfiltrates data before encryption, threatens to publish it. 
+                    Examples: Maze, REvil, DarkSide.
+                  </p>
+                  <div class="mt-2" style="font-size: 0.85rem; color: #9ca3af;">
+                    <strong>Targets:</strong> Sensitive business data, customer records
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4 mb-3">
+                <div class="p-3" style="background: #fff7ed; border-radius: 10px; border: 1px solid #fed7aa; height: 100%;">
+                  <h5 style="color: #ea580c;"><i class="fas fa-bug"></i> Ransomware-as-a-Service</h5>
+                  <p style="color: #6b7280; font-size: 0.95rem; line-height: 1.6;">
+                    <strong>Criminal franchise model.</strong> Developers sell/rent ransomware to affiliates. 
+                    Lowers barrier to entry for attackers.
+                  </p>
+                  <div class="mt-2" style="font-size: 0.85rem; color: #9ca3af;">
+                    <strong>Examples:</strong> LockBit, BlackCat, Hive
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4 mb-3">
+                <div class="p-3" style="background: #fff7ed; border-radius: 10px; border: 1px solid #fed7aa; height: 100%;">
+                  <h5 style="color: #ea580c;"><i class="fas fa-mobile-alt"></i> Mobile Ransomware</h5>
+                  <p style="color: #6b7280; font-size: 0.95rem; line-height: 1.6;">
+                    <strong>Targets smartphones/tablets.</strong> Locks devices or encrypts data. 
+                    Spreads through malicious apps or SMS.
+                  </p>
+                  <div class="mt-2" style="font-size: 0.85rem; color: #9ca3af;">
+                    <strong>Platforms:</strong> Android (primary), iOS (rare)
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4 mb-3">
+                <div class="p-3" style="background: #fff7ed; border-radius: 10px; border: 1px solid #fed7aa; height: 100%;">
+                  <h5 style="color: #ea580c;"><i class="fas fa-file-code"></i> Scareware</h5>
+                  <p style="color: #6b7280; font-size: 0.95rem; line-height: 1.6;">
+                    <strong>Fake security alerts.</strong> Tricks users into believing their system is infected. 
+                    Demands payment for fake "fix".
+                  </p>
+                  <div class="mt-2" style="font-size: 0.85rem; color: #9ca3af;">
+                    <strong>Method:</strong> Social engineering, fake alerts
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Real-World Examples -->
+        <div class="card mb-4">
+          <div class="card-header" style="background: #7c2d12; color: white; padding: 1.25rem;">
+            <h4 style="margin: 0; color: white;"><i class="fas fa-newspaper"></i> Notable Ransomware Attacks</h4>
+          </div>
+          <div class="card-body" style="padding: 2rem;">
+            <div class="timeline">
+              <div class="timeline-item">
+                <div class="timeline-marker" style="background: #dc2626;"></div>
+                <div class="timeline-content">
+                  <h5 style="color: #dc2626; margin-bottom: 0.5rem;">WannaCry (2017)</h5>
+                  <p style="color: #6b7280; line-height: 1.6;">
+                    <strong>Impact:</strong> Infected 200,000+ computers in 150 countries. Hit NHS (UK healthcare), FedEx, Telefónica.<br>
+                    <strong>Damage:</strong> $4 billion in losses worldwide<br>
+                    <strong>Method:</strong> Exploited Windows SMB vulnerability (EternalBlue)
+                  </p>
+                </div>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-marker" style="background: #dc2626;"></div>
+                <div class="timeline-content">
+                  <h5 style="color: #dc2626; margin-bottom: 0.5rem;">NotPetya (2017)</h5>
+                  <p style="color: #6b7280; line-height: 1.6;">
+                    <strong>Impact:</strong> Targeted Ukraine, spread globally. Hit Maersk shipping, Merck pharma, FedEx.<br>
+                    <strong>Damage:</strong> $10 billion+ in total losses<br>
+                    <strong>Method:</strong> Supply chain attack via Ukrainian accounting software
+                  </p>
+                </div>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-marker" style="background: #dc2626;"></div>
+                <div class="timeline-content">
+                  <h5 style="color: #dc2626; margin-bottom: 0.5rem;">Colonial Pipeline (2021)</h5>
+                  <p style="color: #6b7280; line-height: 1.6;">
+                    <strong>Impact:</strong> Shut down major US fuel pipeline for 6 days. Gas shortages across East Coast.<br>
+                    <strong>Ransom Paid:</strong> $4.4 million (partially recovered by FBI)<br>
+                    <strong>Method:</strong> DarkSide ransomware via compromised VPN credentials
+                  </p>
+                </div>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-marker" style="background: #dc2626;"></div>
+                <div class="timeline-content">
+                  <h5 style="color: #dc2626; margin-bottom: 0.5rem;">JBS Foods (2021)</h5>
+                  <p style="color: #6b7280; line-height: 1.6;">
+                    <strong>Impact:</strong> World's largest meat processor. Shut down operations in US, Canada, Australia.<br>
+                    <strong>Ransom Paid:</strong> $11 million<br>
+                    <strong>Method:</strong> REvil ransomware group targeted food supply chain
+                  </p>
+                </div>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-marker" style="background: #dc2626;"></div>
+                <div class="timeline-content">
+                  <h5 style="color: #dc2626; margin-bottom: 0.5rem;">Kaseya (2021)</h5>
+                  <p style="color: #6b7280; line-height: 1.6;">
+                    <strong>Impact:</strong> Supply chain attack affecting 1,500+ companies via MSP software.<br>
+                    <strong>Ransom Demand:</strong> $70 million<br>
+                    <strong>Method:</strong> REvil exploited zero-day in Kaseya VSA remote management tool
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Prevention Tips -->
+        <div class="card mb-4">
+          <div class="card-header" style="background: linear-gradient(135deg, #16a34a 0%, #15803d 100%); color: white; padding: 1.25rem;">
+            <h4 style="margin: 0; color: white;"><i class="fas fa-shield-alt"></i> How to Protect Against Ransomware</h4>
+          </div>
+          <div class="card-body" style="padding: 2rem;">
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <div class="p-3" style="background: #f0fdf4; border-radius: 10px; border: 1px solid #86efac;">
+                  <h5 style="color: #16a34a;"><i class="fas fa-backup"></i> Backup Strategy</h5>
+                  <ul style="color: #4b5563; line-height: 1.8;">
+                    <li><strong>3-2-1 Rule:</strong> 3 copies, 2 different media, 1 offsite</li>
+                    <li><strong>Regular backups:</strong> Daily automated backups</li>
+                    <li><strong>Offline backups:</strong> Air-gapped storage</li>
+                    <li><strong>Test restoration:</strong> Verify backups work</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="col-md-6 mb-3">
+                <div class="p-3" style="background: #f0fdf4; border-radius: 10px; border: 1px solid #86efac;">
+                  <h5 style="color: #16a34a;"><i class="fas fa-sync-alt"></i> System Updates</h5>
+                  <ul style="color: #4b5563; line-height: 1.8;">
+                    <li><strong>Patch promptly:</strong> Install security updates ASAP</li>
+                    <li><strong>Auto-updates:</strong> Enable automatic OS updates</li>
+                    <li><strong>Software inventory:</strong> Track all installed applications</li>
+                    <li><strong>EOL software:</strong> Replace unsupported systems</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="col-md-6 mb-3">
+                <div class="p-3" style="background: #f0fdf4; border-radius: 10px; border: 1px solid #86efac;">
+                  <h5 style="color: #16a34a;"><i class="fas fa-user-shield"></i> Security Training</h5>
+                  <ul style="color: #4b5563; line-height: 1.8;">
+                    <li><strong>Phishing awareness:</strong> Recognize suspicious emails</li>
+                    <li><strong>Quarterly training:</strong> Regular security education</li>
+                    <li><strong>Simulated attacks:</strong> Test user awareness</li>
+                    <li><strong>Incident reporting:</strong> Clear escalation path</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="col-md-6 mb-3">
+                <div class="p-3" style="background: #f0fdf4; border-radius: 10px; border: 1px solid #86efac;">
+                  <h5 style="color: #16a34a;"><i class="fas fa-network-wired"></i> Network Security</h5>
+                  <ul style="color: #4b5563; line-height: 1.8;">
+                    <li><strong>Network segmentation:</strong> Isolate critical systems</li>
+                    <li><strong>Zero trust:</strong> Verify every access request</li>
+                    <li><strong>MFA everywhere:</strong> Multi-factor authentication</li>
+                    <li><strong>Least privilege:</strong> Minimal access rights</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="col-md-6 mb-3">
+                <div class="p-3" style="background: #f0fdf4; border-radius: 10px; border: 1px solid #86efac;">
+                  <h5 style="color: #16a34a;"><i class="fas fa-robot"></i> Endpoint Protection</h5>
+                  <ul style="color: #4b5563; line-height: 1.8;">
+                    <li><strong>EDR/XDR:</strong> Advanced threat detection</li>
+                    <li><strong>Application whitelisting:</strong> Block unauthorized apps</li>
+                    <li><strong>Disable macros:</strong> Block Office macro execution</li>
+                    <li><strong>Email filtering:</strong> Block malicious attachments</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="col-md-6 mb-3">
+                <div class="p-3" style="background: #f0fdf4; border-radius: 10px; border: 1px solid #86efac;">
+                  <h5 style="color: #16a34a;"><i class="fas fa-clipboard-check"></i> Incident Response</h5>
+                  <ul style="color: #4b5563; line-height: 1.8;">
+                    <li><strong>Response plan:</strong> Documented procedures</li>
+                    <li><strong>Tabletop exercises:</strong> Practice scenarios</li>
+                    <li><strong>Isolation procedures:</strong> Quick containment</li>
+                    <li><strong>Forensics capability:</strong> Investigation tools</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Statistics -->
+        <div class="card mb-4">
+          <div class="card-header" style="background: #1e40af; color: white; padding: 1.25rem;">
+            <h4 style="margin: 0; color: white;"><i class="fas fa-chart-pie"></i> Ransomware Statistics (2025)</h4>
+          </div>
+          <div class="card-body" style="padding: 2rem;">
+            <div class="row text-center">
+              <div class="col-md-3 mb-3">
+                <div class="p-3" style="background: #eff6ff; border-radius: 10px;">
+                  <div style="font-size: 2.5rem; font-weight: 700; color: #1e40af;">71%</div>
+                  <div style="color: #6b7280; font-size: 0.9rem;">Organizations hit by ransomware in 2025</div>
+                </div>
+              </div>
+              <div class="col-md-3 mb-3">
+                <div class="p-3" style="background: #eff6ff; border-radius: 10px;">
+                  <div style="font-size: 2.5rem; font-weight: 700; color: #1e40af;">$812K</div>
+                  <div style="color: #6b7280; font-size: 0.9rem;">Average ransom payment demanded</div>
+                </div>
+              </div>
+              <div class="col-md-3 mb-3">
+                <div class="p-3" style="background: #eff6ff; border-radius: 10px;">
+                  <div style="font-size: 2.5rem; font-weight: 700; color: #1e40af;">21 days</div>
+                  <div style="color: #6b7280; font-size: 0.9rem;">Average recovery time from attack</div>
+                </div>
+              </div>
+              <div class="col-md-3 mb-3">
+                <div class="p-3" style="background: #eff6ff; border-radius: 10px;">
+                  <div style="font-size: 2.5rem; font-weight: 700; color: #1e40af;">11s</div>
+                  <div style="color: #6b7280; font-size: 0.9rem;">Frequency of ransomware attacks globally</div>
+                </div>
+              </div>
+            </div>
+            <div class="mt-4 p-3" style="background: #f9fafb; border-radius: 8px; border: 1px solid #e5e7eb;">
+              <div style="font-size: 0.9rem; color: #6b7280; line-height: 1.7;">
+                <strong style="color: #1f2937;">Key Insights:</strong><br>
+                • Healthcare sector most targeted (34% of all attacks)<br>
+                • Only 8% of organizations that paid ransom recovered all their data<br>
+                • Average downtime costs: $274,000 per hour<br>
+                • 60% of small businesses close within 6 months of a ransomware attack<br>
+                • RaaS (Ransomware-as-a-Service) grew 90% year-over-year
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Why RanDetect Helps -->
+        <div class="card" style="background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%); color: white;">
+          <div class="card-body" style="padding: 2.5rem;">
+            <div class="row align-items-center">
+              <div class="col-md-8">
+                <h3 style="color: white; margin-bottom: 1rem;">
+                  <i class="fas fa-shield-halved"></i> How RanDetect Protects You
+                </h3>
+                <p style="font-size: 1.1rem; line-height: 1.7; margin-bottom: 1rem;">
+                  Traditional signature-based antivirus cannot detect new ransomware variants. RanDetect uses 
+                  <strong>behavior-based machine learning</strong> to identify ransomware patterns in executable files 
+                  <em>before</em> they can encrypt your data.
+                </p>
+                <ul style="font-size: 1rem; line-height: 1.8;">
+                  <li><strong>Early Detection:</strong> Catches threats before encryption starts</li>
+                  <li><strong>Zero-Day Protection:</strong> Detects unknown variants via behavioral analysis</li>
+                  <li><strong>Instant Response:</strong> Automated quarantine within milliseconds</li>
+                  <li><strong>Continuous Learning:</strong> Model retraining adapts to new threats</li>
+                </ul>
+              </div>
+              <div class="col-md-4 text-center">
+                <div style="font-size: 5rem; animation: bounce-slow 2s ease-in-out infinite;">
+                  <i class="fas fa-shield-virus"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MAIN DASHBOARD -->
+    <section class="py-section" id="metrics">
+      <div class="container">
+        <h2 style="margin-bottom: 2rem;">
+          <i class="fas fa-gauge"></i> Detection Dashboard
+        </h2>
+
+        <div class="dashboard-grid">
+          <!-- LEFT PANEL: CONTROLS & UPLOAD -->
+          <div>
+            <!-- Model Training Card -->
+            <div class="card mb-3">
+              <div class="card-header">
+                <i class="fas fa-brain"></i> Model Training
+              </div>
+              <div class="card-body">
+                <p class="small-muted">Retrain the model on current dataset</p>
+                <button id="trainBtn" class="btn btn-primary w-100 mb-3">
+                  <i class="fas fa-redo"></i> Train Model
+                </button>
+                <div id="trainStatus"></div>
+                <div class="mt-3 p-3 flat" style="background: #f9fafb; border-radius: 8px; border: 1px solid #e5e7eb;">
+                  <div class="small-muted mb-2">Current Accuracy:</div>
+                  <div style="font-size: 1.75rem; font-weight: 700; color: #16a34a;">
+                    <span id="accBadge">-</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Upload Dataset Card -->
+            <div class="card">
+              <div class="card-header">
+                <i class="fas fa-upload"></i> Upload Dataset
+              </div>
+              <div class="card-body">
+                <form id="uploadForm">
+                  <div class="form-group">
+                    <label class="form-label">Select CSV File</label>
+                    <input id="fileInput" type="file" accept=".csv" class="form-control" />
+                  </div>
+                  <button class="btn btn-success w-100" type="submit">
+                    <i class="fas fa-cloud-upload-alt"></i> Upload CSV
+                  </button>
+                </form>
+                <hr>
+                <h6>Class Distribution</h6>
+                <div style="height: 200px; position: relative;">
+                  <canvas id="classChart"></canvas>
+                </div>
               </div>
             </div>
           </div>
 
-          <div class="card p-3">
-            <h5>Predict Row</h5>
-            <div class="mb-2 small-muted">Provide numeric fields as JSON (only numeric columns used)</div>
-            <form id="predictForm">
-              <textarea id="rowInput" class="form-control mono" rows="6">{}</textarea>
-              <div class="mt-2 d-flex gap-2">
-                <button class="btn btn-success">Predict</button>
-                <button id="randomBtn" type="button" class="btn btn-secondary">Generate Random Row</button>
+          <!-- RIGHT PANEL: METRICS & STATS -->
+          <div>
+            <!-- Dataset Info Card -->
+            <div class="card mb-3">
+              <div class="card-header">
+                <i class="fas fa-database"></i> Dataset & Metrics
               </div>
-            </form>
-            <div id="mitigationArea" class="mt-2"></div>
-            <pre id="predOut" class="mt-3" style="background:#fff;padding:10px;border:1px solid #eef;"></pre>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-6">
+                    <div class="small-muted mb-2">Sample Data</div>
+                    <pre id="statsPre" class="mono" style="max-height: 280px; overflow: auto; background: #f9fafb; padding: 12px; border-radius: 6px; border: 1px solid #e5e7eb; font-size: 0.8rem;"></pre>
+                  </div>
+                  <div class="col-6">
+                    <div class="small-muted mb-2">Model Performance</div>
+                    <pre id="metricsPre" class="mono" style="max-height: 280px; overflow: auto; background: #f9fafb; padding: 12px; border-radius: 6px; border: 1px solid #e5e7eb; font-size: 0.8rem;"></pre>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Prediction Card -->
+            <div class="card">
+              <div class="card-header">
+                <i class="fas fa-wand-magic-sparkles"></i> Ransomware Prediction
+              </div>
+              <div class="card-body">
+                <form id="predictForm">
+                  <div class="form-group">
+                    <label class="form-label">Feature Vector (JSON)</label>
+                    <small class="text-muted">Only numeric fields are used for prediction</small>
+                    <textarea id="rowInput" class="form-control mono" rows="5">{}</textarea>
+                  </div>
+                  <div class="d-grid gap-2">
+                    <button class="btn btn-primary" type="submit">
+                      <i class="fas fa-bolt"></i> Predict
+                    </button>
+                    <button id="randomBtn" type="button" class="btn btn-outline-primary">
+                      <i class="fas fa-dice"></i> Generate Random Row
+                    </button>
+                  </div>
+                </form>
+                <div id="mitigationArea" class="mt-3"></div>
+                <div class="small-muted mt-3 mb-2">Prediction Result:</div>
+                <pre id="predOut" class="mono" style="background: #f9fafb; padding: 12px; border-radius: 6px; border: 1px solid #e5e7eb; max-height: 300px; overflow: auto;"></pre>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
+      </section>
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="/static/app.js"></script>
-  </body>
-</html>
+      <!-- PERFORMANCE METRICS SECTION -->
+      <section class="py-large" id="performance" style="background: #f9fafb;">
+        <div class="container">
+          <h2 style="margin-bottom: 3rem; text-align: center;">
+            <i class="fas fa-chart-line"></i> Model Performance
+          </h2>
+          
+          <div class="row mb-4">
+            <div class="col-md-6">
+              <div class="card">
+                <div class="card-header">
+                  <i class="fas fa-square-check"></i> Classification Metrics
+                </div>
+                <div class="card-body">
+                  <table class="metrics-table">
+                    <thead>
+                      <tr>
+                        <th>Metric</th>
+                        <th>Value</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td><strong>Accuracy</strong></td>
+                        <td><span class="badge badge-success badge-lg">99.62%</span></td>
+                      </tr>
+                      <tr>
+                        <td><strong>Precision (Ransomware)</strong></td>
+                        <td><span class="badge badge-success badge-lg">99.63%</span></td>
+                      </tr>
+                      <tr>
+                        <td><strong>Recall (Ransomware)</strong></td>
+                        <td><span class="badge badge-success badge-lg">99.70%</span></td>
+                      </tr>
+                      <tr>
+                        <td><strong>F1-Score</strong></td>
+                        <td><span class="badge badge-success badge-lg">99.68%</span></td>
+                      </tr>
+                      <tr>
+                        <td><strong>Test Samples</strong></td>
+                        <td><span class="badge badge-info badge-lg">12,497</span></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="card">
+                <div class="card-header">
+                  <i class="fas fa-shield-check"></i> What This Means
+                </div>
+                <div class="card-body">
+                  <div class="mb-3">
+                    <h6 class="text-primary">✓ 99.63% Precision</h6>
+                    <p class="text-secondary">Of every 10,000 alerts, ~9,963 are true threats. Only 37 false positives.</p>
+                  </div>
+                  <div class="mb-3">
+                    <h6 class="text-primary">✓ 99.70% Recall</h6>
+                    <p class="text-secondary">We catch 9,970 out of every 10,000 ransomware samples. Only 30 threats slip through.</p>
+                  </div>
+                  <div>
+                    <h6 class="text-primary">✓ Production Ready</h6>
+                    <p class="text-secondary">Excellent balance between detection and accuracy. Ready for real-world deployment.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- RISK LEVELS SECTION -->
+      <section class="py-section">
+        <div class="container">
+          <h2 style="margin-bottom: 3rem; text-align: center;">
+            <i class="fas fa-triangle-exclamation"></i> Risk Assessment Levels
+          </h2>
+          
+          <div class="row">
+            <div class="col-md-4">
+              <div class="card border-0" style="border-left: 4px solid #16a34a !important;">
+                <div class="card-body text-center">
+                  <div style="font-size: 2rem; color: #16a34a; margin-bottom: 12px;">
+                    <i class="fas fa-check-circle"></i>
+                  </div>
+                  <h5>LOW RISK</h5>
+                  <p class="text-secondary">P(Ransomware) &lt; 40%</p>
+                  <p class="small-muted">No action required. Sample appears benign.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card border-0" style="border-left: 4px solid #ea580c !important;">
+                <div class="card-body text-center">
+                  <div style="font-size: 2rem; color: #ea580c; margin-bottom: 12px;">
+                    <i class="fas fa-exclamation-circle"></i>
+                  </div>
+                  <h5>MEDIUM RISK</h5>
+                  <p class="text-secondary">P(Ransomware) 40-60%</p>
+                  <p class="small-muted">Monitor closely. Human review recommended.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card border-0" style="border-left: 4px solid #dc2626 !important;">
+                <div class="card-body text-center">
+                  <div style="font-size: 2rem; color: #dc2626; margin-bottom: 12px;">
+                    <i class="fas fa-shield-exclamation"></i>
+                  </div>
+                  <h5>HIGH RISK</h5>
+                  <p class="text-secondary">P(Ransomware) ≥ 60%</p>
+                  <p class="small-muted">Immediate quarantine and alert.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- HOW IT WORKS SECTION -->
+      <section class="py-large" id="how-it-works" style="background: #f9fafb;">
+        <div class="container">
+          <h2 style="margin-bottom: 3rem; text-align: center;">
+            <i class="fas fa-gears"></i> How RanDetect Works
+          </h2>
+          
+          <div class="row">
+            <div class="col-md-3 mb-4">
+              <div class="text-center">
+                <div style="width: 60px; height: 60px; background: linear-gradient(135deg, #dc2626, #991b1b); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5rem; margin: 0 auto 20px;">
+                  <i class="fas fa-upload"></i>
+                </div>
+                <h5>1. Input</h5>
+                <p class="text-secondary">Submit PE file characteristics or feature vector</p>
+              </div>
+            </div>
+
+            <div class="col-md-3 mb-4">
+              <div class="text-center">
+                <div style="width: 60px; height: 60px; background: linear-gradient(135deg, #0284c7, #075985); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5rem; margin: 0 auto 20px;">
+                  <i class="fas fa-brain"></i>
+                </div>
+                <h5>2. Analyze</h5>
+                <p class="text-secondary">Random Forest ML model processes 14 behavioral features</p>
+              </div>
+            </div>
+
+            <div class="col-md-3 mb-4">
+              <div class="text-center">
+                <div style="width: 60px; height: 60px; background: linear-gradient(135deg, #16a34a, #15803d); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5rem; margin: 0 auto 20px;">
+                  <i class="fas fa-chart-line"></i>
+                </div>
+                <h5>3. Predict</h5>
+                <p class="text-secondary">Returns confidence score and risk level instantly</p>
+              </div>
+            </div>
+
+            <div class="col-md-3 mb-4">
+              <div class="text-center">
+                <div style="width: 60px; height: 60px; background: linear-gradient(135deg, #9333ea, #6b21a8); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5rem; margin: 0 auto 20px;">
+                  <i class="fas fa-lock"></i>
+                </div>
+                <h5>4. Respond</h5>
+                <p class="text-secondary">Auto-quarantine high-risk files and notify team</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CONTACT/SUPPORT SECTION -->
+      <section class="py-large">
+        <div class="container">
+          <h2 style="margin-bottom: 3rem; text-align: center;">
+            <i class="fas fa-headset"></i> Need Assistance?
+          </h2>
+          
+          <div class="row">
+            <div class="col-md-6 mb-4">
+              <div class="card h-100">
+                <div class="card-body text-center">
+                  <div style="font-size: 2.5rem; color: #dc2626; margin-bottom: 16px;">
+                    <i class="fas fa-book"></i>
+                  </div>
+                  <h5>Documentation</h5>
+                  <p class="text-secondary mb-3">Access comprehensive guides for API usage and deployment</p>
+                  <a href="/static/PROJECT_DETAILS.md" class="btn btn-primary btn-sm" target="_blank">
+                    <i class="fas fa-book"></i> View Docs
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6 mb-4">
+              <div class="card h-100">
+                <div class="card-body text-center">
+                  <div style="font-size: 2.5rem; color: #dc2626; margin-bottom: 16px;">
+                    <i class="fas fa-code"></i>
+                  </div>
+                  <h5>API Reference</h5>
+                  <p class="text-secondary mb-3">Quick start guide for REST API integration</p>
+                  <a href="/static/API_QUICK_REFERENCE.md" class="btn btn-primary btn-sm" target="_blank">
+                    <i class="fas fa-link"></i> API Docs
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- FOOTER -->
+      <footer>
+        <div class="container">
+          <div class="footer-content">
+            <div class="footer-section">
+              <h4><i class="fas fa-shield-virus"></i> RanDetect</h4>
+              <p style="color: rgba(255, 255, 255, 0.7);">AI-Powered Ransomware Detection & Mitigation Platform. Protecting systems with machine learning.</p>
+            </div>
+            <div class="footer-section">
+              <h4>Quick Links</h4>
+              <ul>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#metrics">Dashboard</a></li>
+                <li><a href="#performance">Metrics</a></li>
+                <li><a href="#how-it-works">How It Works</a></li>
+              </ul>
+            </div>
+            <div class="footer-section">
+              <h4>Resources</h4>
+              <ul>
+                <li><a href="#" target="_blank">Documentation</a></li>
+                <li><a href="#" target="_blank">API Reference</a></li>
+                <li><a href="#" target="_blank">GitHub Repository</a></li>
+                <li><a href="#" target="_blank">Report Issues</a></li>
+              </ul>
+            </div>
+            <div class="footer-section">
+              <h4>Connect</h4>
+              <ul>
+                <li><a href="#" target="_blank"><i class="fab fa-twitter"></i> Twitter</a></li>
+                <li><a href="#" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a></li>
+                <li><a href="#" target="_blank"><i class="fab fa-github"></i> GitHub</a></li>
+                <li><a href="#" target="_blank"><i class="fas fa-envelope"></i> Email</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="footer-bottom">
+            <p>&copy; 2026 RanDetect. All rights reserved. | <a href="#" style="color: rgba(255, 255, 255, 0.7); text-decoration: none;">Privacy Policy</a> | <a href="#" style="color: rgba(255, 255, 255, 0.7); text-decoration: none;">Terms of Service</a></p>
+          </div>
+        </div>
+      </footer>

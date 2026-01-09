@@ -23,13 +23,59 @@ python app.py
 
 4. Open http://localhost:5000 in your browser to use the dashboard.
 
-Files:
-- `app.py` — Flask app and API endpoints
-- `model.py` — training, prediction, and dataset utilities
-- `train_model.py` — CLI to train the model
-- `templates/index.html` — simple dashboard UI
+## 📁 Project Structure
 
-Notifications:
+```
+ransomware-webapp_with_model/
+├── app.py                      # Flask app and API endpoints
+├── model.py                    # Training, prediction, and dataset utilities
+├── train_model.py             # CLI to train the model
+├── notifier.py                # Multi-channel notifications
+├── templates/index.html       # Enhanced dashboard UI
+├── static/
+│   ├── app.css               # Modern styling with animations
+│   └── app.js                # Frontend interactivity
+├── data_file.csv             # Training dataset (62K+ samples)
+├── model.joblib              # Trained ML model
+├── model_metrics.json        # Performance metrics
+├── Dockerfile                # Container deployment
+├── Procfile                  # Heroku deployment config
+├── render.yaml               # Render deployment config
+└── Documentation/
+    ├── PROJECT_DETAILS.md           # Comprehensive project guide
+    ├── API_QUICK_REFERENCE.md       # API documentation
+    ├── TECHNICAL_ARCHITECTURE.md    # System design details
+    └── USER_GUIDE.md                # Installation & usage guide
+```
+
+## 🚀 Deployment
+
+### Deploy to Render (Free)
+
+1. Fork/Clone this repository
+2. Create account at [render.com](https://render.com)
+3. New Web Service → Connect your GitHub repo
+4. Render auto-detects `render.yaml` configuration
+5. Click "Create Web Service"
+6. Your live URL: `https://ransomware-webapp-<id>.onrender.com`
+
+### Deploy to Heroku
+
+```bash
+heroku login
+heroku create ransomware-detector
+git push heroku master
+heroku open
+```
+
+## 📖 Documentation
+
+- **[PROJECT_DETAILS.md](PROJECT_DETAILS.md)** - Full technical specifications
+- **[API_QUICK_REFERENCE.md](API_QUICK_REFERENCE.md)** - REST API endpoints
+- **[TECHNICAL_ARCHITECTURE.md](TECHNICAL_ARCHITECTURE.md)** - System architecture
+- **[USER_GUIDE.md](USER_GUIDE.md)** - Setup and usage instructions
+
+## Notifications
 - Configure notification endpoints using environment variables or a `.env` file (see `.env.example`). Available options:
 	- `MITIGATION_WEBHOOK_URL` - generic JSON webhook URL
 	- `SLACK_WEBHOOK_URL` - Slack incoming webhook URL
